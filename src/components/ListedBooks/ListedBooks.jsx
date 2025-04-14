@@ -1,9 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLoaderData } from 'react-router';
+import { getStoredReadList } from '../../utility/addToDB';
+import Book from '../Book/Book';
 
 const ListedBooks = () => {
+    const allBooks = useLoaderData();
+    const [readBooks, setReadBooks] = useState([]);
+
+    useEffect(() => {
+        const storedReadList = getStoredReadList();
+        const storedReadListInt = storedReadList.map(id => parseInt(id));
+        const readBookList = 
+        allBooks.filter(book => storedReadListInt.includes(book.bookId));
+        setReadBooks(readBookList);
+    }, [])
+
     return (
-        <div>
-            <h1 className='text-6xl'>This is Listed Books Page</h1>
+        <div className='my-20'>
+            {/* name of each tab group should be unique */}
+            <div className="tabs tabs-lift">
+                <label className="tab">
+                    <input type="radio" name="my_tabs_4" defaultChecked />
+                    Read Books
+                </label>
+                <div className="tab-content bg-base-100 border-base-300 p-6">
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+                        {
+                            readBooks.map(book => <Book key={book.bookId} book={book}></Book>)
+                        }
+                    </div>
+                </div>
+
+                <label className="tab">
+                    <input type="radio" name="my_tabs_4" />
+                    Wishlist Books
+                </label>
+                <div className="tab-content bg-base-100 border-base-300 p-6">Books that I wish to read</div>
+            </div>
         </div>
     );
 };

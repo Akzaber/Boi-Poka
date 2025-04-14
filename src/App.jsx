@@ -14,9 +14,11 @@ function App() {
       <Route path='/' element={<RootLayout></RootLayout>} errorElement={<ErrorPage></ErrorPage>}>
         <Route index element={<Home></Home>}></Route>
         <Route path='books/:bookId' element={<BookDetail></BookDetail>
-      } loader={() => fetch('booksData.json')}
+      } loader={() => fetch('booksData.json')}//do not load all data for one data.
       ></Route>
-        <Route path='listedBooks' element={<ListedBooks></ListedBooks>}></Route>
+        <Route path='listedBooks' element={<ListedBooks></ListedBooks>}
+        loader={() => fetch('booksData.json')}//do not load all data for some data.
+        ></Route>
         <Route path='pagesToRead' element={<PagesToRead></PagesToRead>}></Route>
       </Route>
     )
