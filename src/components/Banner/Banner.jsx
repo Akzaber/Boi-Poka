@@ -9,10 +9,10 @@ const Banner = () => {
                     src={bannerImg}
                     className="max-w-sm rounded shadow-2xl" />
                 <div className='space-y-12'>
-                    <p className='text-6xl font-semibold'>
+                    <div className='text-6xl font-semibold'>
                         <h2 className='mb-6'>Books to Freshen up</h2>
                         <h2>Your Bookshelf</h2>
-                    </p>
+                    </div>
                     <button className="btn btn-lg btn-outline btn-neutral">View the List</button>
                 </div>
             </div>

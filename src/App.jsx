@@ -5,6 +5,7 @@ import ListedBooks from './components/ListedBooks/ListedBooks'
 import PagesToRead from './components/PagesToRead/PagesToRead'
 import RootLayout from './layout/Rootlayout'
 import ErrorPage from './components/ErrorPage/ErrorPage'
+import BookDetail from './components/BookDetail/BookDetail'
 
 function App() {
 
@@ -12,6 +13,9 @@ function App() {
     createRoutesFromElements(
       <Route path='/' element={<RootLayout></RootLayout>} errorElement={<ErrorPage></ErrorPage>}>
         <Route index element={<Home></Home>}></Route>
+        <Route path='books/:bookId' element={<BookDetail></BookDetail>
+      } loader={() => fetch('booksData.json')}
+      ></Route>
         <Route path='listedBooks' element={<ListedBooks></ListedBooks>}></Route>
         <Route path='pagesToRead' element={<PagesToRead></PagesToRead>}></Route>
       </Route>
