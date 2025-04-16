@@ -5,24 +5,23 @@ import Book from '../Book/Book';
 import { getStoredWishList } from '../../utility/addToLS';
 
 const ListedBooks = () => {
-    const allBooks = useLoaderData();
     const [readBooks, setReadBooks] = useState([]);
     const [wishListBooks, setWishListBooks] = useState([]);
-
+    const allBooks = useLoaderData();
+    
     useEffect(() => {
         const storedReadList = getStoredReadList();
         const storedReadListInt = storedReadList.map(id => parseInt(id));
-        const readBookList = 
-        allBooks.filter(book => storedReadListInt.includes(book.bookId));
+        const readBookList = allBooks.filter(book => storedReadListInt.includes(book.bookId));
         setReadBooks(readBookList);
-    }, [])
+    }, [allBooks])
 
     useEffect(() => {
         const storedWishList = getStoredWishList();
         const storedWishListInt = storedWishList.map(id => parseInt(id));
         const readWishList = allBooks.filter(book => storedWishListInt.includes(book.bookId));
         setWishListBooks(readWishList);
-    }, [])
+    }, [allBooks])
 
     return (
         <div className='my-20'>
